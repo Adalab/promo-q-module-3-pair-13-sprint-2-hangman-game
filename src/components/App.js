@@ -11,6 +11,7 @@ import "../styles/Header.scss";
 //components
 import Header from "./Header";
 import Dummy from "./Dummy";
+import SolutionLetters from "./SolutionLetters";
 
 function App() {
   const [word, setWord] = useState("");
@@ -87,37 +88,17 @@ function App() {
   return (
     <div className="page">
       <Header />
-      {/*  <header>
-        <h1 className='header__title'>Juego del ahorcado</h1>
-      </header> */}
+
       <main className="main">
-        <section>
-          <div className="solution">
-            <h2 className="title">Solución:</h2>
-            <ul className="letters">{renderSolutionLetters()}</ul>
-          </div>
-          <div className="error">
-            <h2 className="title">Letras falladas:</h2>
-            <ul className="letters">{renderErrorLetters()}</ul>
-          </div>
-          <form className="form" onSubmit={handleSubmit}>
-            <label className="title" htmlFor="last-letter">
-              Escribe una letra:
-            </label>
-            <input
-              autoFocus
-              autoComplete="off"
-              className="form__input"
-              maxLength="1"
-              type="text"
-              name="last-letter"
-              id="last-letter"
-              value={lastLetter}
-              onKeyDown={handleKeyDown}
-              onChange={handleChange}
-            />
-          </form>
-        </section>
+        <SolutionLetters
+          word={word}
+          userLetters={userLetters}
+          handleSubmit={handleSubmit}
+          renderSolutionLetters={renderErrorLetters}
+          value={lastLetter}
+          handleKeyDown={handleKeyDown()}
+          handleChange={handleChange}
+        />
         <Dummy numberOfErrors={getNumberOfErrors()} />
       </main>
     </div>
