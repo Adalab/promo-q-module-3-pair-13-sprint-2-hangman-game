@@ -1,18 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 // api
-import getWordFromApi from '../services/fetch';
+import getWordFromApi from "../services/fetch";
 // styles
-import '../styles/App.scss';
-import '../styles/Dummy.scss';
-import '../styles/Letters.scss';
-import '../styles/Form.scss';
-import '../styles/Header.scss';
+import "../styles/App.scss";
+import "../styles/Dummy.scss";
+import "../styles/Letters.scss";
+import "../styles/Form.scss";
+import "../styles/Header.scss";
+//components
+import Header from "./Header";
+import Dummy from "./Dummy";
 
 function App() {
-  const [word, setWord] = useState('');
+  const [word, setWord] = useState("");
   const [userLetters, setUserLetters] = useState([]);
-  const [lastLetter, setLastLetter] = useState('');
+  const [lastLetter, setLastLetter] = useState("");
 
   useEffect(() => {
     getWordFromApi().then((word) => {
@@ -46,12 +49,12 @@ function App() {
   };
 
   const renderSolutionLetters = () => {
-    const wordLetters = word.split('');
+    const wordLetters = word.split("");
     return wordLetters.map((letter, index) => {
       const exists = userLetters.includes(letter.toLocaleLowerCase());
       return (
-        <li key={index} className='letter'>
-          {exists ? letter : ''}
+        <li key={index} className="letter">
+          {exists ? letter : ""}
         </li>
       );
     });
@@ -64,7 +67,7 @@ function App() {
     );
     return errorLetters.map((letter, index) => {
       return (
-        <li key={index} className='letter'>
+        <li key={index} className="letter">
           {letter}
         </li>
       );
@@ -82,53 +85,40 @@ function App() {
   };
 
   return (
-    <div className='page'>
-      <header>
+    <div className="page">
+      <Header />
+      {/*  <header>
         <h1 className='header__title'>Juego del ahorcado</h1>
-      </header>
-      <main className='main'>
+      </header> */}
+      <main className="main">
         <section>
-          <div className='solution'>
-            <h2 className='title'>Solución:</h2>
-            <ul className='letters'>{renderSolutionLetters()}</ul>
+          <div className="solution">
+            <h2 className="title">Solución:</h2>
+            <ul className="letters">{renderSolutionLetters()}</ul>
           </div>
-          <div className='error'>
-            <h2 className='title'>Letras falladas:</h2>
-            <ul className='letters'>{renderErrorLetters()}</ul>
+          <div className="error">
+            <h2 className="title">Letras falladas:</h2>
+            <ul className="letters">{renderErrorLetters()}</ul>
           </div>
-          <form className='form' onSubmit={handleSubmit}>
-            <label className='title' htmlFor='last-letter'>
+          <form className="form" onSubmit={handleSubmit}>
+            <label className="title" htmlFor="last-letter">
               Escribe una letra:
             </label>
             <input
               autoFocus
-              autoComplete='off'
-              className='form__input'
-              maxLength='1'
-              type='text'
-              name='last-letter'
-              id='last-letter'
+              autoComplete="off"
+              className="form__input"
+              maxLength="1"
+              type="text"
+              name="last-letter"
+              id="last-letter"
               value={lastLetter}
               onKeyDown={handleKeyDown}
               onChange={handleChange}
             />
           </form>
         </section>
-        <section className={`dummy error-${getNumberOfErrors()}`}>
-          <span className='error-13 eye'></span>
-          <span className='error-12 eye'></span>
-          <span className='error-11 line'></span>
-          <span className='error-10 line'></span>
-          <span className='error-9  line'></span>
-          <span className='error-8  line'></span>
-          <span className='error-7  line'></span>
-          <span className='error-6  head'></span>
-          <span className='error-5  line'></span>
-          <span className='error-4  line'></span>
-          <span className='error-3  line'></span>
-          <span className='error-2  line'></span>
-          <span className='error-1  line'></span>
-        </section>
+        <Dummy numberOfErrors={getNumberOfErrors()} />
       </main>
     </div>
   );
