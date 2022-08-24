@@ -91,12 +91,11 @@ function App() {
 
       <main className="main">
         <SolutionLetters
-          word={word}
-          userLetters={userLetters}
           handleSubmit={handleSubmit}
-          renderSolutionLetters={renderErrorLetters}
+          renderErrorLetters={renderErrorLetters()}
+          renderSolutionLetters={renderSolutionLetters()}
           value={lastLetter}
-          handleKeyDown={handleKeyDown()}
+          handleKeyDown={handleKeyDown}
           handleChange={handleChange}
         />
         <Dummy numberOfErrors={getNumberOfErrors()} />
