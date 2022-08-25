@@ -6,7 +6,6 @@ import getWordFromApi from "../services/fetch";
 import "../styles/App.scss";
 import "../styles/Dummy.scss";
 import "../styles/Letters.scss";
-import "../styles/Form.scss";
 import "../styles/Header.scss";
 //components
 import Header from "./Header";
@@ -26,15 +25,11 @@ function App() {
 
   // events
 
-  const handleKeyDown = (ev) => {
-    // Sabrías decir para qué es esta línea
-    ev.target.setSelectionRange(0, 1);
-  };
 
-  const handleChange = (ev) => {
+  const handleChange = (value) => {
     let re = /[a-zA-Z]/; //add regular pattern - lesson 3.3 exercise 2
-    if (re.test(ev.target.value)) {
-      handleLastLetter(ev.target.value);
+    if (re.test(value)) {
+      handleLastLetter(value);
     }
   };
 
@@ -94,8 +89,7 @@ function App() {
           handleSubmit={handleSubmit}
           renderErrorLetters={renderErrorLetters()}
           renderSolutionLetters={renderSolutionLetters()}
-          value={lastLetter}
-          handleKeyDown={handleKeyDown}
+          lastLetter={lastLetter}
           handleChange={handleChange}
         />
         <Dummy numberOfErrors={getNumberOfErrors()} />

@@ -11,7 +11,10 @@ const SolutionLetters = (props) => {
         <h2 className="title">Letras falladas:</h2>
         <ul className="letters">{props.renderErrorLetters}</ul>
       </div>
-      <Form />
+      <Form 
+      handleChange={props.handleChange}
+      handleSubmit={props.handleSubmit}
+      lastLeters={props.lastLeters}/>
     </section>
   );
 };

@@ -1,5 +1,15 @@
 import "../styles/Form.scss";
 const Form = (props) => {
+
+const handleChange = (ev) => {
+  props.handleChange(ev.target.value)
+}
+
+const handleKeyDown = (ev) => {
+  // Sabrías decir para qué es esta línea
+  ev.target.setSelectionRange(0, 1);
+};
+
   return (
     <form className="form" onSubmit={props.handleSubmit}>
       <label className="title" htmlFor="last-letter">
@@ -14,8 +24,8 @@ const Form = (props) => {
         name="last-letter"
         id="last-letter"
         value={props.lastLetter}
-        onKeyDown={props.handleKeyDown}
-        onChange={props.handleChange}
+        onKeyDown={handleKeyDown}
+        onChange={handleChange}
       />
     </form>
   );
