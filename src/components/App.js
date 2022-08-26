@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
+import { Route, Routes} from 'react-router-dom';
 
 // api
 import getWordFromApi from "../services/fetch";
+
 // styles
 import "../styles/App.scss";
-import "../styles/Dummy.scss";
-import "../styles/Letters.scss";
-import "../styles/Header.scss";
+
 //components
 import Header from "./Header";
 import Dummy from "./Dummy";
 import SolutionLetters from "./SolutionLetters";
+import Footer from "./Footer";
+import Instructions from "./Instructions";
 
 function App() {
   const [word, setWord] = useState("");
@@ -81,6 +83,7 @@ function App() {
   };
 
   return (
+    
     <div className="page">
       <Header />
 
@@ -94,7 +97,14 @@ function App() {
         />
         <Dummy numberOfErrors={getNumberOfErrors()} />
       </main>
-    </div>
+      <Footer />
+
+      <Routes>
+        <Route 
+          path="/instructions"
+          element={<Instructions/>}/>
+      </Routes>
+    </div>    
   );
 }
 
